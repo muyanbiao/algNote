@@ -50,13 +50,31 @@ node *createLinkList(int array[], int arrCnt) {
     return head;
 }
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
+/// 查找链表中元素x的个数
+/// @param linkList 链表
+/// @param x 值x
+int searchLinkList(node *linkList, int x) {
+    int cnt = 0;
     
-    int array[5] = {5, 3, 4, 1, 2};
+    linkList = linkList->next;
+    
+    while (linkList != NULL) {
+        if (linkList->data == x) {
+            cnt++;
+        }
+        linkList = linkList->next;
+    }
+    
+    return cnt;
+}
+
+/// 测试链表创建
+void testCreate() {
+    const int arrCnt = 5;
+    int array[arrCnt] = {5, 3, 4, 1, 2};
     
     // 此时linkList指向的是链表的头结点
-    node *linkList = createLinkList(array, 5);
+    node *linkList = createLinkList(array, arrCnt);
     
     // 让linkList指针指向第一个包含有效数据的节点
     linkList = linkList->next;
@@ -68,6 +86,28 @@ int main(int argc, const char * argv[]) {
     }
     
     cout << endl;
+}
+
+/// 测试链表的查找
+void testSearch() {
+    const int arrCnt = 6;
+    int array[arrCnt] = {5, 3, 4, 1, 3, 2};
+    
+    // 此时linkList指向的是链表的头结点
+    node *linkList = createLinkList(array, arrCnt);
+    
+    int elementToSearch = 3;
+    
+    int cnt = searchLinkList(linkList, elementToSearch);
+    
+    printf("count of element %d is %d", elementToSearch, cnt);
+    
+    cout << endl;
+}
+
+int main(int argc, const char * argv[]) {
+    
+    testSearch();
     
     return 0;
 }
